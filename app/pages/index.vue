@@ -1,34 +1,32 @@
 <template>
   <div>
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white">
+    <!-- Hero Section - Thème sombre fixe -->
+    <section class="hero-section">
       <div class="container-custom">
         <div class="max-w-4xl mx-auto text-center">
-          <div class="animate-fade-in">
-            <h1 class="text-5xl md:text-7xl font-serif-display font-bold text-gray-900 mb-6">
-              Développement Web
-              <span class="block text-4xl md:text-5xl text-gray-600 mt-2">
-                & Solutions Digitales
-              </span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Design rencontre Performance – développement web créatif et solutions digitales sur mesure pour libérer le plein potentiel de votre entreprise.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <NuxtLink to="#contact" class="btn-primary text-lg px-8 py-4">
-                Démarrer un projet
-              </NuxtLink>
-              <NuxtLink to="#projets" class="btn-secondary text-lg px-8 py-4">
-                Voir mes projets
-              </NuxtLink>
-            </div>
+          <h1 class="text-5xl md:text-7xl font-serif-display font-bold text-white mb-6">
+            Développement Web
+            <span class="block text-4xl md:text-5xl text-gray-300 mt-2">
+              & Solutions Digitales
+            </span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Design rencontre Performance – développement web créatif et solutions digitales sur mesure pour libérer le plein potentiel de votre entreprise.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <NuxtLink to="#contact" class="btn-primary text-lg px-8 py-4 hover-button pulse-cta">
+              Démarrer un projet
+            </NuxtLink>
+            <NuxtLink to="#projets" class="btn-secondary text-lg px-8 py-4 hover-button">
+              Voir mes projets
+            </NuxtLink>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="section-padding bg-white">
+    <!-- Services Section - Thème clair -->
+    <section id="services" class="content-section section-padding bg-white">
       <div class="container-custom">
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-16">
@@ -41,9 +39,9 @@
           </div>
 
           <div class="grid md:grid-cols-3 gap-8">
-            <!-- Service 1: Développement Web -->
+            <!-- Service 1 -->
             <div class="group">
-              <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 h-full">
+              <div class="bg-gray-50 p-8 rounded-2xl hover-card h-full relative overflow-hidden">
                 <div class="text-6xl mb-6 text-gray-400 group-hover:text-gray-600 transition-colors duration-300">
                   💻
                 </div>
@@ -62,9 +60,9 @@
               </div>
             </div>
 
-            <!-- Service 2: Applications Mobile -->
+            <!-- Service 2 -->
             <div class="group">
-              <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 h-full">
+              <div class="bg-gray-50 p-8 rounded-2xl hover-card h-full relative overflow-hidden">
                 <div class="text-6xl mb-6 text-gray-400 group-hover:text-gray-600 transition-colors duration-300">
                   📱
                 </div>
@@ -83,9 +81,9 @@
               </div>
             </div>
 
-            <!-- Service 3: Consulting Tech -->
+            <!-- Service 3 -->
             <div class="group">
-              <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 h-full">
+              <div class="bg-gray-50 p-8 rounded-2xl hover-card h-full relative overflow-hidden">
                 <div class="text-6xl mb-6 text-gray-400 group-hover:text-gray-600 transition-colors duration-300">
                   🚀
                 </div>
@@ -109,7 +107,7 @@
     </section>
 
     <!-- Projets Section -->
-    <section id="projets" class="section-padding bg-gray-50">
+    <section id="projets" class="content-section section-padding bg-gray-50">
       <div class="container-custom">
         <div class="max-w-6xl mx-auto">
           <div class="text-center mb-16">
@@ -123,79 +121,85 @@
 
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Projet 1 -->
-            <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-              <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
-                <div class="text-6xl text-white">🌐</div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-serif-display font-bold text-gray-900 mb-2">
-                  E-commerce Moderne
-                </h3>
-                <p class="text-gray-600 mb-4 text-sm">
-                  Plateforme e-commerce complète avec gestion des commandes, paiements sécurisés et interface admin.
-                </p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Vue.js</span>
-                  <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Node.js</span>
-                  <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">MongoDB</span>
+            <div class="group">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
+                <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center relative overflow-hidden">
+                  <div class="text-6xl text-white z-10">🌐</div>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">2024</span>
-                  <a href="#" class="text-gray-900 hover:text-blue-600 text-sm font-medium transition-colors">
-                    Voir le projet →
-                  </a>
+                <div class="p-6">
+                  <h3 class="text-xl font-serif-display font-bold text-gray-900 mb-2">
+                    E-commerce Moderne
+                  </h3>
+                  <p class="text-gray-600 mb-4 text-sm">
+                    Plateforme e-commerce complète avec gestion des commandes, paiements sécurisés et interface admin.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Vue.js</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Node.js</span>
+                    <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">MongoDB</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500">2024</span>
+                    <a href="#" class="text-gray-900 hover:text-blue-600 text-sm font-medium transition-colors">
+                      Voir le projet →
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- Projet 2 -->
-            <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-              <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
-                <div class="text-6xl text-white">📱</div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-serif-display font-bold text-gray-900 mb-2">
-                  App Mobile Fitness
-                </h3>
-                <p class="text-gray-600 mb-4 text-sm">
-                  Application mobile de suivi d'entraînement avec synchronisation cloud et analytics avancés.
-                </p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">React Native</span>
-                  <span class="px-3 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Firebase</span>
-                  <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Redux</span>
+            <div class="group">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
+                <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center relative overflow-hidden">
+                  <div class="text-6xl text-white z-10">📱</div>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">2024</span>
-                  <a href="#" class="text-gray-900 hover:text-blue-600 text-sm font-medium transition-colors">
-                    Voir le projet →
-                  </a>
+                <div class="p-6">
+                  <h3 class="text-xl font-serif-display font-bold text-gray-900 mb-2">
+                    App Mobile Fitness
+                  </h3>
+                  <p class="text-gray-600 mb-4 text-sm">
+                    Application mobile de suivi d'entraînement avec synchronisation cloud et analytics avancés.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">React Native</span>
+                    <span class="px-3 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Firebase</span>
+                    <span class="px-3 py-1 bg-red-100 text-red-800 text-xs rounded-full">Redux</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500">2024</span>
+                    <a href="#" class="text-gray-900 hover:text-blue-600 text-sm font-medium transition-colors">
+                      Voir le projet →
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
             <!-- Projet 3 -->
-            <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-              <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
-                <div class="text-6xl text-white">⚡</div>
-              </div>
-              <div class="p-6">
-                <h3 class="text-xl font-serif-display font-bold text-gray-900 mb-2">
-                  Dashboard Analytics
-                </h3>
-                <p class="text-gray-600 mb-4 text-sm">
-                  Tableau de bord temps réel pour visualiser et analyser les données métier avec des graphiques interactifs.
-                </p>
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Nuxt 3</span>
-                  <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">TypeScript</span>
-                  <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">D3.js</span>
+            <div class="group">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
+                <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center relative overflow-hidden">
+                  <div class="text-6xl text-white z-10">⚡</div>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm text-gray-500">2024</span>
-                  <a href="#" class="text-gray-900 hover:text-blue-600 text-sm font-medium transition-colors">
-                    Voir le projet →
-                  </a>
+                <div class="p-6">
+                  <h3 class="text-xl font-serif-display font-bold text-gray-900 mb-2">
+                    Dashboard Analytics
+                  </h3>
+                  <p class="text-gray-600 mb-4 text-sm">
+                    Tableau de bord temps réel pour visualiser et analyser les données métier avec des graphiques interactifs.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Nuxt 3</span>
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">TypeScript</span>
+                    <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">D3.js</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500">2024</span>
+                    <a href="#" class="text-gray-900 hover:text-blue-600 text-sm font-medium transition-colors">
+                      Voir le projet →
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -205,7 +209,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section-padding bg-white">
+    <section id="contact" class="content-section section-padding bg-white">
       <div class="container-custom">
         <div class="max-w-4xl mx-auto text-center">
           <h2 class="text-4xl md:text-5xl font-serif-display font-bold text-gray-900 mb-6">
@@ -217,7 +221,7 @@
           
           <div class="grid md:grid-cols-2 gap-8 mb-12">
             <div class="text-center">
-              <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-gray-200 transition-colors duration-300">
                 <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -227,7 +231,7 @@
             </div>
             
             <div class="text-center">
-              <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-gray-200 transition-colors duration-300">
                 <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
@@ -238,10 +242,10 @@
           </div>
           
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:maxime@example.com" class="btn-primary text-lg px-8 py-4">
+            <a href="mailto:maxime@example.com" class="btn-primary text-lg px-8 py-4 hover-button">
               Envoyer un email
             </a>
-            <a href="tel:+33612345678" class="btn-secondary text-lg px-8 py-4">
+            <a href="tel:+33612345678" class="btn-secondary text-lg px-8 py-4 hover-button">
               Appeler maintenant
             </a>
           </div>
@@ -252,6 +256,9 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, nextTick } from 'vue'
+import { useScrollAnimation } from '../../composables/useScrollAnimation'
+
 // Meta tags pour le SEO
 useHead({
   title: 'Maxime - Développeur Full Stack',
@@ -259,5 +266,16 @@ useHead({
     { name: 'description', content: 'Portfolio de Maxime - Développeur Full Stack spécialisé en développement web moderne, applications mobiles et consulting tech.' },
     { name: 'keywords', content: 'développeur, full stack, web, mobile, vue.js, react, nuxt, typescript' }
   ]
+})
+
+// Initialisation de l'animation de scroll
+const { initScrollAnimation } = useScrollAnimation()
+
+onMounted(() => {
+  if (process.client) {
+    nextTick(() => {
+      initScrollAnimation()
+    })
+  }
 })
 </script>

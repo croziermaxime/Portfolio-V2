@@ -1,98 +1,55 @@
 <template>
   <div class="min-h-screen bg-white">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-      <div class="container-custom">
-        <div class="flex items-center justify-between h-16">
-          <!-- Logo -->
-          <div class="flex-shrink-0">
-            <NuxtLink to="/" class="text-2xl font-serif-display font-bold text-gray-900">
-              Maxime
-            </NuxtLink>
-          </div>
-          
-          <!-- Navigation Links -->
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-8">
-              <NuxtLink 
-                to="/" 
-                class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200"
-              >
-                Accueil
-              </NuxtLink>
-              <NuxtLink 
-                to="#services" 
-                class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200"
-              >
-                Services
-              </NuxtLink>
-              <NuxtLink 
-                to="#projets" 
-                class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200"
-              >
-                Projets
-              </NuxtLink>
-              <NuxtLink 
-                to="#contact" 
-                class="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200"
-              >
-                Contact
-              </NuxtLink>
-            </div>
-          </div>
-          
-          <!-- Mobile menu button -->
-          <div class="md:hidden">
-            <button 
-              @click="mobileMenuOpen = !mobileMenuOpen"
-              class="text-gray-700 hover:text-gray-900 focus:outline-none focus:text-gray-900"
-            >
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path v-if="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
+    <nav class="navbar">
+      <div class="navbar-content">
+        <!-- Logo -->
+        <NuxtLink to="/" class="logo">
+          Maxime
+        </NuxtLink>
+        
+        <!-- Burger Menu - Deux traits seulement -->
+        <button 
+          @click="mobileMenuOpen = !mobileMenuOpen"
+          class="burger-menu"
+          :class="{ open: mobileMenuOpen }"
+        >
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </button>
       </div>
       
       <!-- Mobile menu -->
-      <div v-show="mobileMenuOpen" class="md:hidden bg-white border-t border-gray-100">
-        <div class="px-2 pt-2 pb-3 space-y-1">
-          <NuxtLink 
-            to="/" 
-            class="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium"
-            @click="mobileMenuOpen = false"
-          >
-            Accueil
-          </NuxtLink>
-          <NuxtLink 
-            to="#services" 
-            class="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium"
-            @click="mobileMenuOpen = false"
-          >
-            Services
-          </NuxtLink>
-          <NuxtLink 
-            to="#projets" 
-            class="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium"
-            @click="mobileMenuOpen = false"
-          >
-            Projets
-          </NuxtLink>
-          <NuxtLink 
-            to="#contact" 
-            class="text-gray-700 hover:text-gray-900 block px-3 py-2 text-base font-medium"
-            @click="mobileMenuOpen = false"
-          >
-            Contact
-          </NuxtLink>
-        </div>
+      <div class="mobile-menu" :class="{ open: mobileMenuOpen }">
+        <NuxtLink 
+          to="/" 
+          @click="mobileMenuOpen = false"
+        >
+          Accueil
+        </NuxtLink>
+        <NuxtLink 
+          to="#services" 
+          @click="mobileMenuOpen = false"
+        >
+          Services
+        </NuxtLink>
+        <NuxtLink 
+          to="#projets" 
+          @click="mobileMenuOpen = false"
+        >
+          Projets
+        </NuxtLink>
+        <NuxtLink 
+          to="#contact" 
+          @click="mobileMenuOpen = false"
+        >
+          Contact
+        </NuxtLink>
       </div>
     </nav>
     
     <!-- Main Content -->
-    <main class="pt-16">
+    <main>
       <slot />
     </main>
     
@@ -132,5 +89,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const mobileMenuOpen = ref(false)
 </script>
