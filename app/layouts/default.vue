@@ -1,26 +1,23 @@
 <template>
   <div class="min-h-screen bg-white">
-    <!-- Navigation -->
-    <nav class="navbar">
+    <!-- Navigation Klimenko Style -->
+    <nav class="navbar-klimenko">
       <div class="navbar-content">
         <!-- Logo -->
-        <NuxtLink to="/" class="logo">
-          Maxime
+        <NuxtLink 
+          to="/" 
+          class="logo-klimenko"
+          :style="{ color: logoColor }"
+        >
+          M. Crozier
         </NuxtLink>
         
-        <!-- Desktop nav -->
-        <div class="hidden md:flex items-center gap-8">
-          <NuxtLink to="#services" class="text-gray-700 hover:text-gray-900 transition-colors">Services</NuxtLink>
-          <NuxtLink to="#projets" class="text-gray-700 hover:text-gray-900 transition-colors">Projets</NuxtLink>
-          <NuxtLink to="#contact" class="text-gray-700 hover:text-gray-900 transition-colors">Contact</NuxtLink>
-          <NuxtLink to="#contact" class="btn-primary px-4 py-2">Demander un devis</NuxtLink>
-        </div>
-        
-        <!-- Burger Menu - Deux traits seulement -->
+        <!-- Burger Menu - Toujours visible comme Klimenko -->
         <button 
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="burger-menu md:hidden"
+          class="burger-menu-klimenko"
           :class="{ open: mobileMenuOpen }"
+          :style="{ color: burgerColor }"
           aria-label="Ouvrir le menu"
           :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
         >
@@ -29,39 +26,64 @@
         </button>
       </div>
       
-      <!-- Mobile menu -->
-      <div class="mobile-menu md:hidden" :class="{ open: mobileMenuOpen }">
-        <NuxtLink 
-          to="/" 
-          @click="mobileMenuOpen = false"
-        >
-          Accueil
-        </NuxtLink>
-        <NuxtLink 
-          to="#services" 
-          @click="mobileMenuOpen = false"
-        >
-          Services
-        </NuxtLink>
-        <NuxtLink 
-          to="#projets" 
-          @click="mobileMenuOpen = false"
-        >
-          Projets
-        </NuxtLink>
-        <NuxtLink 
-          to="#contact" 
-          @click="mobileMenuOpen = false"
-        >
-          Contact
-        </NuxtLink>
-        <NuxtLink 
-          to="#contact" 
-          class="btn-primary mt-4"
-          @click="mobileMenuOpen = false"
-        >
-          Demander un devis
-        </NuxtLink>
+      <!-- Off-Canvas Menu -->
+      <div class="off-canvas-menu" :class="{ open: mobileMenuOpen }">
+        <div class="off-canvas-content">
+          <div class="off-canvas-header">
+            <button 
+              @click="mobileMenuOpen = false"
+              class="close-btn"
+              aria-label="Fermer le menu"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          
+          <div class="off-canvas-body">
+            <div class="menu-links">
+              <NuxtLink 
+                to="/" 
+                @click="mobileMenuOpen = false"
+                class="menu-link"
+              >
+                Accueil
+              </NuxtLink>
+              <NuxtLink 
+                to="#services" 
+                @click="mobileMenuOpen = false"
+                class="menu-link"
+              >
+                Services
+              </NuxtLink>
+              <NuxtLink 
+                to="#projets" 
+                @click="mobileMenuOpen = false"
+                class="menu-link"
+              >
+                Projets
+              </NuxtLink>
+              <NuxtLink 
+                to="#contact" 
+                @click="mobileMenuOpen = false"
+                class="menu-link"
+              >
+                Contact
+              </NuxtLink>
+            </div>
+            
+            <div class="menu-cta">
+              <NuxtLink 
+                to="#contact" 
+                class="btn-primary-klimenko"
+                @click="mobileMenuOpen = false"
+              >
+                Demander un devis
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
     
@@ -106,7 +128,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useNavbarColor } from '~/composables/useNavbarColor'
 
 const mobileMenuOpen = ref(false)
+const { logoColor, burgerColor, initNavbarColorDetection } = useNavbarColor()
+
+onMounted(() => {
+  initNavbarColorDetection()
+})
+
+// Fermer le menu quand on clique à l'extérieur
+const handleClickOutside = (event: Event) => {
+  const target = event.target as HTMLElement
+  if (!target.closest('.navbar-klimenko') && mobileMenuOpen.value) {
+    mobileMenuOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>

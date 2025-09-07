@@ -293,7 +293,7 @@
 <script setup lang="ts">
 import { onMounted, nextTick } from 'vue'
 import { useScrollAnimation } from '../../composables/useScrollAnimation'
-import { useGridAnimation } from '../../composables/useGridAnimation'
+import { useGridAnimation } from '~/composables/useGridAnimation'
 
 // Meta tags pour le SEO
 useHead({
