@@ -8,11 +8,21 @@
           Maxime
         </NuxtLink>
         
+        <!-- Desktop nav -->
+        <div class="hidden md:flex items-center gap-8">
+          <NuxtLink to="#services" class="text-gray-700 hover:text-gray-900 transition-colors">Services</NuxtLink>
+          <NuxtLink to="#projets" class="text-gray-700 hover:text-gray-900 transition-colors">Projets</NuxtLink>
+          <NuxtLink to="#contact" class="text-gray-700 hover:text-gray-900 transition-colors">Contact</NuxtLink>
+          <NuxtLink to="#contact" class="btn-primary px-4 py-2">Demander un devis</NuxtLink>
+        </div>
+        
         <!-- Burger Menu - Deux traits seulement -->
         <button 
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="burger-menu"
+          class="burger-menu md:hidden"
           :class="{ open: mobileMenuOpen }"
+          aria-label="Ouvrir le menu"
+          :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
         >
           <div class="burger-line"></div>
           <div class="burger-line"></div>
@@ -20,7 +30,7 @@
       </div>
       
       <!-- Mobile menu -->
-      <div class="mobile-menu" :class="{ open: mobileMenuOpen }">
+      <div class="mobile-menu md:hidden" :class="{ open: mobileMenuOpen }">
         <NuxtLink 
           to="/" 
           @click="mobileMenuOpen = false"
@@ -44,6 +54,13 @@
           @click="mobileMenuOpen = false"
         >
           Contact
+        </NuxtLink>
+        <NuxtLink 
+          to="#contact" 
+          class="btn-primary mt-4"
+          @click="mobileMenuOpen = false"
+        >
+          Demander un devis
         </NuxtLink>
       </div>
     </nav>

@@ -1,3 +1,9 @@
+  /* Conteneur stack qui regroupe services+projets+contact */
+  .stack-section {
+    position: relative;
+    z-index: 10;
+    background: transparent;
+  }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,7 +46,7 @@
     @apply inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300;
   }
 
-  /* Hero Section - Thème sombre fixe */
+  /* Hero Section - Thème sombre fixe avec grille interactive */
   .hero-section {
     position: fixed;
     top: 0;
@@ -48,26 +54,133 @@
     width: 100%;
     height: 100vh;
     z-index: 1;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: #000000; /* Noir profond */
     color: #f1f5f9;
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 1;
+    transform: scale(1);
+    overflow: hidden;
   }
 
-  /* Sections de contenu - Thème clair qui vient par-dessus */
-  .content-section {
+  /* Grille interactive en arrière-plan */
+  .hero-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(150, 150, 150, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(150, 150, 150, 0.1) 1px, transparent 1px);
+    background-size: 25px 25px;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+
+  /* Cellules de la grille pour l'interaction */
+  .grid-cell {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.001);
+    transition: all 0.15s ease-out;
+    pointer-events: none;
+    opacity: 0.01;
+  }
+
+  .grid-cell.highlighted {
+    background: linear-gradient(45deg, 
+      rgba(59, 130, 246, 0.4) 0%, 
+      rgba(147, 51, 234, 0.35) 50%, 
+      rgba(59, 130, 246, 0.4) 100%);
+    border-color: rgba(0, 70, 181, 0.9);
+    box-shadow: 
+      0 0 25px rgba(59, 130, 246, 0.7),
+      0 0 50px rgba(147, 51, 234, 0.5),
+      inset 0 0 20px rgba(59, 130, 246, 0.3);
+    opacity: 1;
+    transform: scale(1.08);
+    z-index: 2;
+    transition: all 0.1s ease-out;
+  }
+
+  /* Animation subtile des cellules */
+  .grid-cell {
+    animation: gridFadeIn 3s ease-in-out infinite alternate;
+  }
+
+  /* Contenu de la hero section */
+  .hero-content {
     position: relative;
+    z-index: 5;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100vh;
+    padding-bottom: 15rem;
+  }
+
+  /* Réactiver les événements pour les éléments interactifs */
+  .hero-content a,
+  .hero-content button,
+  .hero-content .btn-primary,
+  .hero-content .btn-secondary {
+    pointer-events: auto;
+  }
+
+  /* Curseur personnalisé pour la section hero */
+  .hero-section {
+    cursor: none;
+  }
+
+  .hero-section .hero-content * {
+    cursor: auto;
+  }
+
+  /* Section Services - Glisse par-dessus la hero section (version stable) */
+  .services-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 10;
     background: #ffffff;
     color: #1f2937;
     min-height: 100vh;
     transform: translateY(100vh);
-    transition: transform 0.8s ease-out;
+    opacity: 1;
   }
 
-  .content-section.visible {
-    transform: translateY(0);
+  /* Supprimer tout pseudo-élément lié aux arrondis */
+
+  /* Aucun ajustement spécifique nécessaire dans la version stable */
+
+  /* Supprimé: le voile n'est plus nécessaire */
+
+  /* Supprimer tout masque */
+
+  /* Supprimer forçages d'arrondi */
+
+  /* Supprimer règle ultra-spécifique */
+
+  /* Toutes les sections - Position normale, collées ensemble */
+  .content-section {
+    position: relative;
+    z-index: 5;
+    background: #ffffff;
+    color: #1f2937;
+    min-height: 100vh;
+  }
+
+  /* Container pour permettre le scroll */
+  .scroll-container {
+    position: relative;
+    z-index: 5;
+    height: 100vh; /* espace d'une hauteur d'écran pour la transition */
+    background: transparent;
   }
 
   /* Navbar */
@@ -76,11 +189,16 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #e5e7eb;
+    z-index: 9999;
+    background: #0b1220; /* très contrasté pour vérification visuelle */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.3s ease;
+    opacity: 1;
+    /* Pas de transform pour éviter un nouveau contexte d'empilement */
+    color: #ffffff;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+    height: 64px;
+    border: 0 solid transparent; /* sécurité resets */
   }
 
   .navbar-content {
@@ -94,7 +212,7 @@
   .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1f2937;
+    color: #ffffff;
     text-decoration: none;
   }
 
@@ -113,7 +231,7 @@
   .burger-line {
     width: 100%;
     height: 2px;
-    background: #1f2937;
+    background: #ffffff;
     transition: all 0.3s ease;
   }
 
@@ -236,5 +354,17 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes gridFadeIn {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.3;
   }
 }
