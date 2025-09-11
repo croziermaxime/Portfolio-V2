@@ -1,12 +1,21 @@
   /* Conteneur stack qui regroupe services+projets+contact */
   .stack-section {
     position: relative;
-    z-index: 10;
+    z-index: auto;
     background: transparent;
   }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Chargement de la police Grayfel Extended Demi */
+@font-face {
+  font-family: 'Grayfel Extended Demi';
+  src: url('/fonts/Grayfel-Extended-Demi.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 @layer base {
   html {
@@ -14,14 +23,44 @@
   }
   
   body {
-    font-family: var(--font-family-sans);
+    font-family: 'Grayfel Extended Demi', var(--font-family-sans);
     line-height: 1.6;
     margin: 0;
     padding: 0;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-serif-display);
+    font-family: 'Grayfel Extended Demi', var(--font-family-serif-display);
+  }
+
+  /* Classes spécifiques pour forcer Grayfel Extended Demi */
+  .font-grayfel {
+    font-family: 'Grayfel Extended Demi', sans-serif !important;
+  }
+
+  /* Hero section - tous les éléments de texte */
+  .hero-section h1,
+  .hero-section h2,
+  .hero-section p,
+  .hero-section .btn-primary,
+  .hero-section .btn-secondary {
+    font-family: 'Grayfel Extended Demi', sans-serif !important;
+  }
+
+  /* Burger menu - tous les éléments de texte */
+  .burger-menu-test,
+  .mobile-menu-dark .menu-logo a,
+  .mobile-menu-dark .menu-link,
+  .mobile-menu-dark .social-link {
+    font-family: 'Grayfel Extended Demi', sans-serif !important;
+  }
+
+  /* Tous les titres de sections */
+  .services-section h2,
+  .services-section h3,
+  .content-section h2,
+  .content-section h3 {
+    font-family: 'Grayfel Extended Demi', sans-serif !important;
   }
 }
 
@@ -53,7 +92,7 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 1;
+    z-index: 4;
     background: #000000; /* Noir profond */
     color: #f1f5f9;
     display: flex;
@@ -62,6 +101,7 @@
     opacity: 1;
     transform: scale(1);
     overflow: hidden;
+    padding-top: 64px; /* Espace pour la navbar */
   }
 
   /* Grille interactive en arrière-plan */
@@ -72,8 +112,8 @@
     width: 100%;
     height: 100%;
     background-image: 
-      linear-gradient(rgba(150, 150, 150, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(150, 150, 150, 0.1) 1px, transparent 1px);
+      linear-gradient(rgba(91, 91, 91, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91, 91, 91, 0.1) 1px, transparent 1px);
     background-size: 25px 25px;
     z-index: 1;
     transition: all 0.3s ease;
@@ -84,7 +124,7 @@
     position: absolute;
     width: 25px;
     height: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.001);
+    border: 1px solid rgba(91, 91, 91, 0.001);
     transition: all 0.15s ease-out;
     pointer-events: none;
     opacity: 0.01;
@@ -121,6 +161,7 @@
     justify-content: center;
     height: 100vh;
     padding-bottom: 15rem;
+    font-family: 'Grayfel Extended Demi', sans-serif;
   }
 
   /* Réactiver les événements pour les éléments interactifs */
@@ -171,7 +212,7 @@
   /* Toutes les sections - Position normale, collées ensemble */
   .content-section {
     position: relative;
-    z-index: 5;
+    z-index: 0;
     background: #ffffff;
     color: #1f2937;
     min-height: 100vh;
@@ -186,104 +227,457 @@
   /* Container pour permettre le scroll */
   .scroll-container {
     position: relative;
-    z-index: 5;
+    z-index: 0;
     height: 100vh; /* espace d'une hauteur d'écran pour la transition */
     background: transparent;
   }
 
-  /* Navbar */
-  .navbar {
+  /* Navbar Klimenko-style - Transparente et adaptative */
+  .navbar-klimenko {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 9999;
-    background: #0b1220; /* très contrasté pour vérification visuelle */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease;
-    opacity: 1;
-    /* Pas de transform pour éviter un nouveau contexte d'empilement */
-    color: #ffffff;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-    height: 64px;
-    border: 0 solid transparent; /* sécurité resets */
+    z-index: 99999;
+    background: transparent; /* Complètement transparente */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 80px;
+    will-change: transform;
+    pointer-events: none; /* Permet le clic à travers sauf sur les éléments */
+  }
+
+  .navbar-klimenko .navbar-content {
+    pointer-events: auto; /* Réactive les clics sur le contenu */
+    position: relative;
+    z-index: 100000;
   }
 
   .navbar-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 4rem;
-    padding: 0 1rem;
+    height: 80px;
+    padding: 0 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
   }
 
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ffffff;
+  /* Logo Klimenko-style - Adaptatif avec effet de transition fluide */
+  .logo-klimenko {
+    font-family: 'Grayfel Extended Demi', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #000000; /* Par défaut noir */
     text-decoration: none;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(45deg, #000000 0%, #000000 50%, #ffffff 50%, #ffffff 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 0.6s ease-in-out;
   }
 
-  .burger-menu {
+  .logo-klimenko:hover {
+    transform: scale(1.05);
+  }
+
+  /* Thème sombre - Logo blanc */
+  .navbar-klimenko.dark-theme .logo-klimenko {
+    background: linear-gradient(45deg, #ffffff 0%, #ffffff 50%, #ffffff 50%, #ffffff 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Thème clair - Logo noir */
+  .navbar-klimenko:not(.dark-theme) .logo-klimenko {
+    background: linear-gradient(45deg, #000000 0%, #000000 50%, #000000 50%, #000000 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Animation de transition de couleur */
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* Burger Menu test - Dark theme simple */
+  .burger-menu-test {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 2rem;
-    height: 1.5rem;
+    width: 2.5rem;
+    height: 1.75rem;
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
+    position: relative;
+    z-index: 100;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .burger-line {
+  .burger-menu-test:hover {
+    transform: scale(1.1);
+  }
+
+  .burger-menu-test .burger-line {
     width: 100%;
     height: 2px;
-    background: #ffffff;
-    transition: all 0.3s ease;
+    background: #ffffff; /* Blanc par défaut pour dark theme */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
-  .burger-menu.open .burger-line:first-child {
+  /* Thème sombre - Burger blanc avec effet lumineux */
+  .navbar-klimenko.dark-theme .burger-menu-test .burger-line {
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Thème clair - Burger noir */
+  .navbar-klimenko:not(.dark-theme) .burger-menu-test .burger-line {
+    background: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Animation d'ouverture */
+  .burger-menu-test.open .burger-line:first-child {
     transform: rotate(45deg) translate(5px, 5px);
   }
 
-  .burger-menu.open .burger-line:last-child {
+  .burger-menu-test.open .burger-line:last-child {
     transform: rotate(-45deg) translate(7px, -6px);
   }
 
-  /* Mobile menu */
-  .mobile-menu {
+  /* Grille de fond pour le burger menu - Version simplifiée */
+  .burger-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 8px 8px;
+    z-index: 1;
+    transition: all 0.3s ease;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  /* Cellules de la grille du burger menu - Version simplifiée */
+  .burger-grid-cell {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.01);
+    transition: all 0.15s ease-out;
+    pointer-events: none;
+    opacity: 0.01;
+    z-index: 2;
+  }
+
+  .burger-grid-cell.highlighted {
+    background: linear-gradient(45deg, 
+      rgba(59, 130, 246, 0.4) 0%, 
+      rgba(147, 51, 234, 0.35) 50%, 
+      rgba(59, 130, 246, 0.4) 100%);
+    border-color: rgba(0, 70, 181, 0.9);
+    box-shadow: 
+      0 0 25px rgba(59, 130, 246, 0.7),
+      0 0 50px rgba(147, 51, 234, 0.5),
+      inset 0 0 20px rgba(59, 130, 246, 0.3);
+    opacity: 1;
+    transform: scale(1.08);
+    z-index: 3;
+    transition: all 0.1s ease-out;
+  }
+
+  /* Animation subtile des cellules du burger - Style hero section */
+  .burger-grid-cell {
+    animation: gridFadeIn 3s ease-in-out infinite alternate;
+  }
+
+  /* Effet de grille lors de l'ouverture */
+  .burger-menu-klimenko.open .burger-grid {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+
+  .burger-menu-klimenko.open .burger-grid-cell {
+    opacity: 0.2;
+    animation: burgerGridPulse 0.5s ease-in-out;
+  }
+
+  @keyframes burgerGridPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.2;
+    }
+  }
+
+  /* Mobile menu dark - Style photo avec grille animée */
+  .mobile-menu-dark {
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
     height: 100vh;
-    background: #ffffff;
+    background: #000000;
     transform: translateX(100%);
-    transition: transform 0.3s ease;
-    z-index: 40;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999999;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .mobile-menu-dark.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Grille de fond pour le menu */
+  .menu-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(91, 91, 91, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91, 91, 91, 0.1) 1px, transparent 1px);
+    background-size: 25px 25px;
+    z-index: 1;
+    transition: all 0.3s ease;
+    opacity: 0.3;
+  }
+
+  /* Cellules de la grille du menu */
+  .menu-grid-cell {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(91, 91, 91, 0.001);
+    transition: all 0.15s ease-out;
+    pointer-events: none;
+    opacity: 0.01;
+    z-index: 2;
+  }
+
+  .menu-grid-cell.highlighted {
+    background: linear-gradient(45deg, 
+      rgba(59, 130, 246, 0.4) 0%, 
+      rgba(147, 51, 234, 0.35) 50%, 
+      rgba(59, 130, 246, 0.4) 100%);
+    border-color: rgba(0, 70, 181, 0.9);
+    box-shadow: 
+      0 0 25px rgba(59, 130, 246, 0.7),
+      0 0 50px rgba(147, 51, 234, 0.5),
+      inset 0 0 20px rgba(59, 130, 246, 0.3);
+    opacity: 1;
+    transform: scale(1.08);
+    z-index: 3;
+    transition: all 0.1s ease-out;
+  }
+
+  /* Animation subtile des cellules du menu */
+  .menu-grid-cell {
+    animation: gridFadeIn 3s ease-in-out infinite alternate;
+  }
+
+  /* Contenu du menu */
+  .menu-content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
+    text-align: center;
   }
 
-  .mobile-menu.open {
-    transform: translateX(0);
+  /* Logo du menu */
+  .menu-logo {
+    margin-bottom: 10rem;
   }
 
-  .mobile-menu a {
-    display: block;
-    padding: 1rem 2rem;
+  .menu-logo a {
+    font-family: 'Grayfel Extended Demi', sans-serif;
     font-size: 1.5rem;
-    font-weight: 500;
-    color: #1f2937;
+    font-weight: 700;
+    color: #ffffff;
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
-  .mobile-menu a:hover {
-    color: #6b7280;
+  .menu-logo a:hover {
+    color: #e2e8f0;
+  }
+
+  /* Navigation du menu */
+  .menu-navigation {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .menu-link {
+    font-family: 'Grayfel Extended Demi', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: inline-block;
+    padding: 0 1rem; /* Espace pour l'effet de soulignement */
+  }
+
+  .menu-link::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: -10px; /* Commence avant le texte */
+    right: -10px; /* Se termine après le texte */
+    height: 2px;
+    background: linear-gradient(45deg, 
+      rgba(59, 130, 246, 0.8) 0%, 
+      rgba(147, 51, 234, 0.6) 50%, 
+      rgba(59, 130, 246, 0.8) 100%);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .menu-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .menu-link:hover {
+    color: #e2e8f0;
+    transform: translateY(-2px);
+  }
+
+  /* Liens sociaux */
+  .menu-social {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    justify-content: center;
+  }
+
+  .social-link {
+    font-family: 'Grayfel Extended Demi', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0 0.5rem;
+  }
+
+  .social-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: -5px;
+    right: -5px;
+    height: 1px;
+    background: linear-gradient(45deg, 
+      rgba(59, 130, 246, 0.8) 0%, 
+      rgba(147, 51, 234, 0.6) 50%, 
+      rgba(59, 130, 246, 0.8) 100%);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+  }
+
+  .social-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .social-link:hover {
+    color: #e2e8f0;
+    transform: translateY(-1px);
+  }
+
+  /* Bouton fermer avec barres qui se croisent */
+  .menu-close-burger {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
+    width: 3rem;
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .menu-close-burger .burger-line {
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 1px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  .menu-close-burger:hover {
+    transform: scale(1.1);
+  }
+
+  .menu-close-burger:hover .burger-line {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Animation de croisement des barres - Positionnement corrigé */
+  .menu-close-burger.open .burger-line:first-child {
+    transform: rotate(45deg) translate(10px, 10px);
+  }
+
+  .menu-close-burger.open .burger-line:first-child {
+    transform: rotate(45deg) translate(10px, 10px);
+  }
+
+  .menu-close-burger.open .burger-line:last-child {
+    transform: rotate(-45deg) translate(10px, -10px);
   }
 
   /* Animations */

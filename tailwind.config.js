@@ -13,6 +13,7 @@ export default {
       fontFamily: {
         'serif-display': ['Libertinus Serif Display', 'serif'],
         'sans': ['Inter', 'sans-serif'],
+        'grayfel': ['Grayfel Extended Demi', 'sans-serif'],
       },
       colors: {
         primary: {

@@ -1,89 +1,109 @@
 <template>
   <div class="min-h-screen bg-white">
-    <!-- Navigation Klimenko Style -->
-    <nav class="navbar-klimenko">
+    <!-- Navigation Klimenko-style -->
+    <nav class="navbar-klimenko" :class="{ 'dark-theme': isDarkTheme }">
       <div class="navbar-content">
         <!-- Logo -->
-        <NuxtLink 
-          to="/" 
-          class="logo-klimenko"
-          :style="{ color: logoColor }"
-        >
-          M. Crozier
+        <NuxtLink to="/" class="logo-klimenko">
+          Maxime
         </NuxtLink>
         
-        <!-- Burger Menu - Toujours visible comme Klimenko -->
+        <!-- Burger Menu - Version test avec dark theme -->
         <button 
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="burger-menu-klimenko"
+          class="burger-menu-test"
           :class="{ open: mobileMenuOpen }"
-          :style="{ color: burgerColor }"
           aria-label="Ouvrir le menu"
           :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
         >
+          <!-- Lignes du burger -->
           <div class="burger-line"></div>
           <div class="burger-line"></div>
         </button>
       </div>
       
-      <!-- Off-Canvas Menu -->
-      <div class="off-canvas-menu" :class="{ open: mobileMenuOpen }">
-        <div class="off-canvas-content">
-          <div class="off-canvas-header">
-            <button 
-              @click="mobileMenuOpen = false"
-              class="close-btn"
-              aria-label="Fermer le menu"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+      <!-- Mobile menu - Style photo avec grille animée -->
+      <div 
+        class="mobile-menu-dark" 
+        :class="{ open: mobileMenuOpen }"
+        @mousemove="animateMenuGrid"
+      >
+        <!-- Grille animée en arrière-plan -->
+        <div class="menu-grid"></div>
+        
+        <!-- Cellules de la grille pour l'interaction -->
+        <div 
+          v-for="cell in menuGridCells" 
+          :key="cell.id"
+          :class="['menu-grid-cell', { highlighted: cell.highlighted }]"
+          :style="{ 
+            left: cell.x + 'px', 
+            top: cell.y + 'px',
+            transitionDelay: cell.delay + 'ms'
+          }"
+        ></div>
+        
+        <!-- Contenu du menu -->
+        <div class="menu-content">
+          <!-- Logo en haut à gauche -->
+          <div class="menu-logo">
+            <NuxtLink to="/" @click="mobileMenuOpen = false">
+              Maxime
+            </NuxtLink>
           </div>
           
-          <div class="off-canvas-body">
-            <div class="menu-links">
-              <NuxtLink 
-                to="/" 
-                @click="mobileMenuOpen = false"
-                class="menu-link"
-              >
-                Accueil
-              </NuxtLink>
-              <NuxtLink 
-                to="#services" 
-                @click="mobileMenuOpen = false"
-                class="menu-link"
-              >
-                Services
-              </NuxtLink>
-              <NuxtLink 
-                to="#projets" 
-                @click="mobileMenuOpen = false"
-                class="menu-link"
-              >
-                Projets
-              </NuxtLink>
-              <NuxtLink 
-                to="#contact" 
-                @click="mobileMenuOpen = false"
-                class="menu-link"
-              >
-                Contact
-              </NuxtLink>
-            </div>
-            
-            <div class="menu-cta">
-              <NuxtLink 
-                to="#contact" 
-                class="btn-primary-klimenko"
-                @click="mobileMenuOpen = false"
-              >
-                Demander un devis
-              </NuxtLink>
-            </div>
+          <!-- Navigation verticale -->
+          <nav class="menu-navigation">
+            <NuxtLink 
+              to="/" 
+              @click="mobileMenuOpen = false"
+              class="menu-link"
+            >
+              Accueil
+            </NuxtLink>
+            <NuxtLink 
+              to="#services" 
+              @click="mobileMenuOpen = false"
+              class="menu-link"
+            >
+              Services
+            </NuxtLink>
+            <NuxtLink 
+              to="#projets" 
+              @click="mobileMenuOpen = false"
+              class="menu-link"
+            >
+              Projets
+            </NuxtLink>
+            <NuxtLink 
+              to="#contact" 
+              @click="mobileMenuOpen = false"
+              class="menu-link"
+            >
+              Contact
+            </NuxtLink>
+          </nav>
+          
+          <!-- Liens sociaux -->
+          <div class="menu-social">
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">X</a>
+            <a href="#" class="social-link">o</a>
+            <a href="#" class="social-link">f</a>
+            <a href="#" class="social-link">Bē</a>
           </div>
         </div>
+        
+        <!-- Bouton fermer - Les barres du burger se transforment en croix -->
+        <button 
+          @click="mobileMenuOpen = false"
+          class="menu-close-burger"
+          :class="{ open: mobileMenuOpen }"
+          aria-label="Fermer le menu"
+        >
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </button>
       </div>
     </nav>
     
@@ -128,29 +148,134 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
-import { useNavbarColor } from '~/composables/useNavbarColor'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useGridAnimation } from '~/composables/useGridAnimation'
 
 const mobileMenuOpen = ref(false)
-const { logoColor, burgerColor, initNavbarColorDetection } = useNavbarColor()
+const isDarkTheme = ref(true) // Forcer le dark theme par défaut pour tester
+const menuGridCells = ref<MenuGridCell[]>([])
 
-onMounted(() => {
-  initNavbarColorDetection()
-})
+// Utiliser le composable useGridAnimation pour le burger menu
+const { 
+  gridCells: burgerGridCells, 
+  mousePosition, 
+  isInitialized,
+  initGridAnimation,
+  cleanup
+} = useGridAnimation()
 
-// Fermer le menu quand on clique à l'extérieur
-const handleClickOutside = (event: Event) => {
-  const target = event.target as HTMLElement
-  if (!target.closest('.navbar-klimenko') && mobileMenuOpen.value) {
-    mobileMenuOpen.value = false
+// Interface pour les cellules du menu
+interface MenuGridCell {
+  id: string
+  x: number
+  y: number
+  highlighted: boolean
+  delay: number
+}
+
+// Fonction pour détecter si on est sur une section sombre
+const checkTheme = () => {
+  const heroSection = document.querySelector('.hero-section')
+  const servicesSection = document.querySelector('.services-section')
+  const projectsSection = document.querySelector('#projets')
+  const contactSection = document.querySelector('#contact')
+  
+  // Vérifier d'abord la hero section (fond noir)
+  if (heroSection) {
+    const rect = heroSection.getBoundingClientRect()
+    const isInHero = rect.top <= 100 && rect.bottom > 100
+    if (isInHero) {
+      isDarkTheme.value = true
+      return
+    }
   }
+  
+  // Vérifier les autres sections (fond clair)
+  const lightSections = [servicesSection, projectsSection, contactSection]
+  let isInLightSection = false
+  
+  lightSections.forEach(section => {
+    if (section) {
+      const rect = section.getBoundingClientRect()
+      if (rect.top <= 100 && rect.bottom > 100) {
+        isInLightSection = true
+      }
+    }
+  })
+  
+  isDarkTheme.value = !isInLightSection
+  
+  // Debug: afficher l'état du thème
+  console.log('Dark theme:', isDarkTheme.value)
+}
+
+// Fonction pour créer la grille du menu
+const createMenuGrid = () => {
+  const cells: MenuGridCell[] = []
+  const cellSize = 25
+  const viewportWidth = window.innerWidth
+  const viewportHeight = window.innerHeight
+  
+  const cols = Math.ceil(viewportWidth / cellSize)
+  const rows = Math.ceil(viewportHeight / cellSize)
+  
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      cells.push({
+        id: `menu-${row}-${col}`,
+        x: col * cellSize,
+        y: row * cellSize,
+        highlighted: false,
+        delay: Math.random() * 200
+      })
+    }
+  }
+  
+  menuGridCells.value = cells
+}
+
+// Fonction pour animer la grille du menu
+const animateMenuGrid = (event: MouseEvent) => {
+  if (!event) return
+  
+  const rect = (event.currentTarget as HTMLElement).getBoundingClientRect()
+  const x = event.clientX - rect.left
+  const y = event.clientY - rect.top
+  
+  menuGridCells.value.forEach(cell => {
+    const distance = Math.sqrt(
+      Math.pow(x - (cell.x + 12.5), 2) + Math.pow(y - (cell.y + 12.5), 2)
+    )
+    
+    if (distance < 50) {
+      cell.highlighted = true
+      setTimeout(() => {
+        cell.highlighted = false
+      }, 300)
+    }
+  })
+}
+
+// Fonction pour animer la grille du burger menu (utilise le composable)
+const animateBurgerGrid = (event: MouseEvent) => {
+  // L'animation est gérée automatiquement par le composable useGridAnimation
+  // Cette fonction peut être utilisée pour des effets supplémentaires si nécessaire
 }
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
+  checkTheme()
+  initGridAnimation() // Initialiser l'animation de grille
+  createMenuGrid() // Initialiser la grille du menu
+  window.addEventListener('scroll', checkTheme)
+  window.addEventListener('resize', () => {
+    checkTheme()
+    createMenuGrid() // Recréer la grille lors du redimensionnement
+  })
 })
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
+  window.removeEventListener('scroll', checkTheme)
+  window.removeEventListener('resize', checkTheme)
+  cleanup() // Nettoyer l'animation de grille
 })
 </script>

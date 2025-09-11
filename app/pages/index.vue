@@ -55,6 +55,7 @@
       </div>
     </section>
 
+    <div class="stack-section">
     <!-- Container de scroll pour permettre le scroll naturel -->
     <div class="scroll-container">
       <!-- Espace pour permettre le scroll -->
@@ -287,12 +288,13 @@
           </div>
         </div>
     </section>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, nextTick } from 'vue'
-import { useScrollAnimation } from '../../composables/useScrollAnimation'
+import { useScrollAnimation } from '~/composables/useScrollAnimation'
 import { useGridAnimation } from '~/composables/useGridAnimation'
 
 // Meta tags pour le SEO
