@@ -4,129 +4,6 @@
     z-index: auto;
     background: transparent;
   }
-
-/* ===== LOCOMOTIVE SCROLL STYLES ===== */
-/* Configuration de base pour Locomotive Scroll */
-html.has-scroll-smooth {
-  overflow: hidden;
-}
-
-html.has-scroll-dragging {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.has-scroll-smooth body {
-  overflow: hidden;
-}
-
-.has-scroll-smooth [data-scroll-container] {
-  min-height: 100vh;
-}
-
-/* Scrollbar personnalisée */
-.c-scrollbar {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 11px;
-  height: 100%;
-  transform-origin: center right;
-  transition: transform 0.3s, opacity 0.3s;
-  opacity: 0;
-  z-index: 1000;
-}
-
-.c-scrollbar:hover {
-  transform: scaleX(1.45);
-}
-
-.c-scrollbar.c-scrollbar_visible {
-  opacity: 1;
-}
-
-.c-scrollbar_thumb {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  opacity: 0.5;
-  width: 7px;
-  border-radius: 10px;
-  margin: 2px;
-  cursor: -webkit-grab;
-  cursor: grab;
-}
-
-.has-scroll-dragging .c-scrollbar_thumb {
-  cursor: -webkit-grabbing;
-  cursor: grabbing;
-}
-
-/* ===== ANIMATIONS LOCOMOTIVE SCROLL ===== */
-/* Éléments avec animations de révélation */
-[data-scroll-animate] {
-  opacity: 0;
-  will-change: transform, opacity;
-  transform: translateY(30px);
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-[data-scroll-animate].is-inview {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Animation de révélation depuis la gauche */
-[data-scroll-animate="reveal-left"] {
-  transform: translateX(-30px);
-}
-
-[data-scroll-animate="reveal-left"].is-inview {
-  transform: translateX(0);
-}
-
-/* Animation de révélation depuis la droite */
-[data-scroll-animate="reveal-right"] {
-  transform: translateX(30px);
-}
-
-[data-scroll-animate="reveal-right"].is-inview {
-  transform: translateX(0);
-}
-
-/* Animation de scale */
-[data-scroll-animate="scale"] {
-  transform: scale(0.8);
-}
-
-[data-scroll-animate="scale"].is-inview {
-  transform: scale(1);
-}
-
-/* Animation de rotation */
-[data-scroll-animate="rotate"] {
-  transform: rotate(5deg);
-}
-
-[data-scroll-animate="rotate"].is-inview {
-  transform: rotate(0deg);
-}
-
-/* Animation de fade */
-[data-scroll-animate="fade"] {
-  opacity: 0;
-  transform: none;
-}
-
-[data-scroll-animate="fade"].is-inview {
-  opacity: 1;
-}
-
-/* ===== FIN LOCOMOTIVE SCROLL STYLES ===== */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -632,21 +509,51 @@ html.has-scroll-dragging {
     font-family: 'Grayfel Extended Demi', sans-serif;
     font-size: 1.75rem;
     font-weight: 600;
-    color: color-mix(in srgb, #000000 calc(100% - var(--theme-progress) * 100%), #ffffff calc(var(--theme-progress) * 100%));
+    color: #000000; /* Par défaut noir */
     text-decoration: none;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: -0.02em;
     position: relative;
     z-index: 10;
-    background: none;
-    -webkit-text-fill-color: unset;
+    background: linear-gradient(45deg, #000000 0%, #000000 50%, #ffffff 50%, #ffffff 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 0.6s ease-in-out;
   }
 
   .logo-klimenko:hover {
     transform: scale(1.05);
   }
 
+  /* Thème sombre - Logo blanc */
+  .navbar-klimenko.dark-theme .logo-klimenko {
+    background: linear-gradient(45deg, #ffffff 0%, #ffffff 50%, #ffffff 50%, #ffffff 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
+  /* Thème clair - Logo noir */
+  .navbar-klimenko:not(.dark-theme) .logo-klimenko {
+    background: linear-gradient(45deg, #000000 0%, #000000 50%, #000000 50%, #000000 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Animation de transition de couleur */
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
 
   /* Burger Menu test - Dark theme simple */
   .burger-menu-test {
@@ -671,12 +578,23 @@ html.has-scroll-dragging {
   .burger-menu-test .burger-line {
     width: 100%;
     height: 2px;
-    background: color-mix(in srgb, #000000 calc(100% - var(--theme-progress) * 100%), #ffffff calc(var(--theme-progress) * 100%));
+    background: #ffffff; /* Blanc par défaut pour dark theme */
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 1px;
-    box-shadow: 0 0 10px color-mix(in srgb, rgba(0, 0, 0, 0.3) calc(100% - var(--theme-progress) * 100%), rgba(255, 255, 255, 0.3) calc(var(--theme-progress) * 100%));
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
+  /* Thème sombre - Burger blanc avec effet lumineux */
+  .navbar-klimenko.dark-theme .burger-menu-test .burger-line {
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Thème clair - Burger noir */
+  .navbar-klimenko:not(.dark-theme) .burger-menu-test .burger-line {
+    background: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
 
   /* Animation d'ouverture */
   .burger-menu-test.open .burger-line:first-child {

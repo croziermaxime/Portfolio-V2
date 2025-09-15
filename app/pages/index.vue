@@ -1,7 +1,7 @@
 <template>
-  <div data-scroll-container>
+  <div>
     <!-- Hero Section - Thème sombre fixe avec grille interactive -->
-    <section class="hero-section" data-scroll-section>
+    <section class="hero-section">
       <!-- Grille interactive en arrière-plan -->
       <div class="hero-grid"></div>
       
@@ -31,31 +31,16 @@
               
               <!-- Colonne droite - Texte -->
               <div class="text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-serif-display font-bold text-white mb-4" 
-                    data-scroll 
-                    data-scroll-speed="0.5"
-                    data-scroll-animate="fade">
+                <h1 class="text-4xl md:text-6xl font-serif-display font-bold text-white mb-4">
                   M. Crozier
                 </h1>
-                <h2 class="text-xl md:text-2xl text-gray-300 mb-6 font-medium" 
-                    data-scroll 
-                    data-scroll-speed="0.3" 
-                    data-scroll-delay="0.1"
-                    data-scroll-animate="reveal-left">
+                <h2 class="text-xl md:text-2xl text-gray-300 mb-6 font-medium">
                   Développeur IA / Fullstack
                 </h2>
-                <p class="text-base md:text-lg text-gray-300 mb-8 max-w-lg leading-relaxed" 
-                   data-scroll 
-                   data-scroll-speed="0.2" 
-                   data-scroll-delay="0.2"
-                   data-scroll-animate="reveal-right">
+                <p class="text-base md:text-lg text-gray-300 mb-8 max-w-lg leading-relaxed">
                   Transformer vos idées en solutions intelligentes grâce à l'intelligence artificielle et au développement fullstack de nouvelle génération.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
-                     data-scroll 
-                     data-scroll-speed="0.1" 
-                     data-scroll-delay="0.3"
-                     data-scroll-animate="scale">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                   <NuxtLink to="#contact" class="btn-primary text-lg px-8 py-4 hover-button pulse-cta">
                     Démarrer un projet
                   </NuxtLink>
@@ -70,21 +55,18 @@
       </div>
     </section>
 
-    <div class="stack-section" data-scroll-section>
+    <div class="stack-section">
     <!-- Container de scroll pour permettre le scroll naturel -->
     <div class="scroll-container">
       <!-- Espace pour permettre le scroll -->
     </div>
 
     <!-- Services Section - Thème clair -->
-    <section id="services" class="services-section section-padding bg-white" data-scroll-section>
+    <section id="services" class="services-section section-padding bg-white">
         <div class="container-custom">
           <div class="max-w-6xl mx-auto">
             <div class="text-left mb-16">
-                <h2 class="text-3xl md:text-5xl font-grayfel font-bold mb-6"
-                    data-scroll 
-                    data-scroll-speed="0.3"
-                    data-scroll-animate="fade">
+                <h2 class="text-3xl md:text-5xl font-grayfel font-bold mb-6">
                   <span class="text-gray-400">Services&nbsp;Qui</span>&nbsp;
                   <span 
                     class="transforment-animated text-blue-900"
@@ -101,18 +83,10 @@
                   </span>&nbsp;
                   <span class="text-gray-400">Vos&nbsp;Idées</span>
                 </h2>
-              <p class="text-lg text-gray-600 max-w-2xl"
-                 data-scroll 
-                 data-scroll-speed="0.2" 
-                 data-scroll-delay="0.1"
-                 data-scroll-animate="reveal-left">
+              <p class="text-lg text-gray-600 max-w-2xl">
                 Développement, intelligence artificielle et automatisation—conçus pour donner vie à vos idées et rendre chaque interaction significative.
               </p>
-              <div class="w-3 h-3 bg-gray-900 rounded-full mt-8"
-                   data-scroll 
-                   data-scroll-speed="0.1" 
-                   data-scroll-delay="0.2"
-                   data-scroll-animate="scale"></div>
+              <div class="w-3 h-3 bg-gray-900 rounded-full mt-8"></div>
             </div>
 
             <!-- Section Expertise -->
@@ -170,31 +144,21 @@
     </section>
     
     <!-- Projets Section -->
-    <section id="projets" class="content-section section-padding bg-white" style="min-height: 120vh;" data-scroll-section>
+    <section id="projets" class="content-section section-padding bg-white" style="min-height: 120vh;">
         <div class="container-custom">
           <div class="max-w-6xl mx-auto">
             <div class="text-center mb-20">
-              <h2 class="text-4xl md:text-5xl font-serif-display font-bold text-gray-900 mb-8"
-                  data-scroll 
-                  data-scroll-speed="0.3"
-                  data-scroll-animate="fade">
+              <h2 class="text-4xl md:text-5xl font-serif-display font-bold text-gray-900 mb-8">
                 Projets
               </h2>
-              <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
-                 data-scroll 
-                 data-scroll-speed="0.2" 
-                 data-scroll-delay="0.1"
-                 data-scroll-animate="reveal-left">
+              <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
                 Découvrez quelques-uns de mes projets récents qui illustrent mon approche technique et créative.
               </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               <!-- Projet 1 -->
-              <div class="group" 
-                   data-scroll 
-                   data-scroll-speed="0.2"
-                   data-scroll-animate="scale">
+              <div class="group">
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
                   <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center relative overflow-hidden">
                     <div class="text-6xl text-white z-10">🌐</div>
@@ -222,11 +186,7 @@
               </div>
 
               <!-- Projet 2 -->
-              <div class="group" 
-                   data-scroll 
-                   data-scroll-speed="0.2" 
-                   data-scroll-delay="0.1"
-                   data-scroll-animate="scale">
+              <div class="group">
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
                   <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center relative overflow-hidden">
                     <div class="text-6xl text-white z-10">📱</div>
@@ -254,11 +214,7 @@
               </div>
 
               <!-- Projet 3 -->
-              <div class="group" 
-                   data-scroll 
-                   data-scroll-speed="0.2" 
-                   data-scroll-delay="0.2"
-                   data-scroll-animate="scale">
+              <div class="group">
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
                   <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center relative overflow-hidden">
                     <div class="text-6xl text-white z-10">⚡</div>
@@ -290,7 +246,7 @@
     </section>
     
     <!-- Contact Section - Design minimaliste inspiré -->
-    <section id="contact" class="content-section section-padding bg-white" data-scroll-section>
+    <section id="contact" class="content-section section-padding bg-white">
         <div class="container-custom">
           <div class="max-w-5xl mx-auto">
             <!-- En-tête de la section -->
@@ -426,7 +382,6 @@ import { useGridAnimation } from '~/composables/useGridAnimation'
 import { useSmoothScroll } from '~/composables/useSmoothScroll'
 import { useTextRevealAnimation } from '~/composables/useTextRevealAnimation'
 import { useThemeTransition } from '~/composables/useThemeTransition'
-import { useLocomotiveScroll } from '~/composables/useLocomotiveScroll'
 
 // Meta tags pour le SEO
 useHead({
@@ -456,12 +411,6 @@ const {
   initThemeTransition,
   destroyThemeTransition
 } = useThemeTransition()
-const { 
-  initLocomotiveScroll, 
-  destroyLocomotiveScroll, 
-  updateLocomotiveScroll,
-  isReady
-} = useLocomotiveScroll()
 
 // Animation de changement d'alphabet pour Transforment
 const isHovering = ref(false)
@@ -503,32 +452,10 @@ const selectBudget = (budget: string) => {
   selectedBudget.value = budget
 }
 
-onMounted(async () => {
-  nextTick(async () => {
-    // Vérifier que nous sommes côté client
-    if (typeof window !== 'undefined') {
-      // Initialiser Locomotive Scroll
-      await initLocomotiveScroll()
-      
-      // Attendre que Locomotive Scroll soit prêt
-      const checkReady = setInterval(() => {
-        if (isReady()) {
-          clearInterval(checkReady)
-          console.log('Locomotive Scroll prêt, mise à jour des animations')
-          updateLocomotiveScroll()
-        }
-      }, 100)
-      
-      // Timeout de sécurité
-      setTimeout(() => {
-        clearInterval(checkReady)
-        if (isReady()) {
-          updateLocomotiveScroll()
-        }
-      }, 2000)
-    }
-    
+onMounted(() => {
+  nextTick(() => {
     initScrollAnimation()
+    initSmoothScroll()
     initThemeTransition()
     
     // Initialiser l'animation des lettres
@@ -566,7 +493,6 @@ const initTextAnimation = () => {
 }
 
 onUnmounted(() => {
-  destroyLocomotiveScroll()
   destroySmoothScroll()
   destroyThemeTransition()
 })

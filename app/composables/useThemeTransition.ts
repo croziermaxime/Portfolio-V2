@@ -6,43 +6,28 @@ export const useThemeTransition = () => {
 
   // Configuration des sections
   const sections = {
-    hero: '.hero-section',
-    services: '.services-section',
     projects: '#projets',
     contact: '#contact'
   }
 
   // Fonction pour calculer le progrès de la transition basé sur la position de scroll
   const calculateThemeProgress = () => {
-    const heroSection = document.querySelector(sections.hero)
-    const servicesSection = document.querySelector(sections.services)
     const projectsSection = document.querySelector(sections.projects)
     const contactSection = document.querySelector(sections.contact)
     
-    if (!heroSection || !servicesSection || !projectsSection || !contactSection) return themeProgress.value
+    if (!projectsSection || !contactSection) return themeProgress.value
 
-    const heroRect = heroSection.getBoundingClientRect()
-    const servicesRect = servicesSection.getBoundingClientRect()
     const projectsRect = projectsSection.getBoundingClientRect()
     const contactRect = contactSection.getBoundingClientRect()
     const windowHeight = window.innerHeight
 
-    // 1. Vérifier si on est dans la hero section (thème sombre)
-    if (heroRect.top <= 100 && heroRect.bottom > 100) {
-      return 1 // Thème sombre
-    }
-
-    // 2. Vérifier si on est dans la section services (thème clair)
-    if (servicesRect.top <= 100 && servicesRect.bottom > 100) {
-      return 0 // Thème clair
-    }
-
-    // 3. Gérer la transition entre projets et contact
+    // Calculer la position relative entre les sections
+    const projectsBottom = projectsRect.bottom
     const contactTop = contactRect.top
     
     // Zone de transition : commencer seulement quand on arrive vraiment sur la section contact
-    const transitionStart = contactTop - windowHeight * 0.2 // Commencer la transition quand la section contact est à 10% de la hauteur d'écran
-    const transitionEnd = contactTop + windowHeight * 0.5 // Finir la transition quand la section contact est à 30% de la hauteur d'écran
+    const transitionStart = contactTop - windowHeight * 0.2 // Commencer la transition quand la section contact est à 20% de la hauteur d'écran
+    const transitionEnd = contactTop + windowHeight * 0.3 // Finir la transition quand la section contact est à 60% de la hauteur d'écran
     
     // Si on est dans la zone de transition
     if (transitionStart < windowHeight && transitionEnd > 0) {
@@ -54,14 +39,14 @@ export const useThemeTransition = () => {
       return easeInOutCubic(progress)
     }
     
-    // 4. Si on est dans la section projets (avant la transition)
-    if (projectsRect.top <= 100 && projectsRect.bottom > 100) {
-      return 0 // Thème clair
+    // Si on est avant la zone de transition
+    if (transitionStart >= windowHeight) {
+      return 0
     }
     
-    // 5. Si on est après la zone de transition (dans contact)
+    // Si on est après la zone de transition
     if (transitionEnd <= 0) {
-      return 1 // Thème sombre
+      return 1
     }
 
     return themeProgress.value
