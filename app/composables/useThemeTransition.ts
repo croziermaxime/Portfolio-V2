@@ -6,20 +6,34 @@ export const useThemeTransition = () => {
 
   // Configuration des sections
   const sections = {
+    hero: '.hero-section',
+    services: '.services-section',
     projects: '#projets',
     contact: '#contact'
   }
 
   // Fonction pour calculer le progrès de la transition basé sur la position de scroll
   const calculateThemeProgress = () => {
+    const heroSection = document.querySelector(sections.hero)
+    const servicesSection = document.querySelector(sections.services)
     const projectsSection = document.querySelector(sections.projects)
     const contactSection = document.querySelector(sections.contact)
     
-    if (!projectsSection || !contactSection) return themeProgress.value
+    if (!heroSection || !servicesSection || !projectsSection || !contactSection) return themeProgress.value
 
+    const heroRect = heroSection.getBoundingClientRect()
+    const servicesRect = servicesSection.getBoundingClientRect()
     const projectsRect = projectsSection.getBoundingClientRect()
     const contactRect = contactSection.getBoundingClientRect()
     const windowHeight = window.innerHeight
+
+    if (heroRect.top <= 100 && heroRect.bottom > 100) {
+      return 1
+    }
+    if ((servicesRect.top <= 100 && servicesRect.bottom > 100) || 
+      (projectsRect.top <= 100 && projectsRect.bottom > 100)) {
+      return 0
+    }
 
     // Calculer la position relative entre les sections
     const projectsBottom = projectsRect.bottom

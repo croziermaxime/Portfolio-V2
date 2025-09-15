@@ -31,7 +31,7 @@
               
               <!-- Colonne droite - Texte -->
               <div class="text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-serif-display font-bold text-white mb-4">
+                <h1 class="text-4xl md:text-6xl font-serif-display font-bold text-blue-600 radian-gradient mb-4 matte-glow">
                   M. Crozier
                 </h1>
                 <h2 class="text-xl md:text-2xl text-gray-300 mb-6 font-medium">
