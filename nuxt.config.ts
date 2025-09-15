@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       'Libertinus Serif Display': [400, 500, 600, 700],
-      'Inter': [300, 400, 500, 600, 700]
+      'Inter': [300, 400, 500, 600, 700],
+      'Grayfel Ext Demi': [400, 500, 600, 700]
     },
     display: 'swap'
   },

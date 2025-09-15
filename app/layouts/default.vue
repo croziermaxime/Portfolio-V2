@@ -150,9 +150,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useGridAnimation } from '~/composables/useGridAnimation'
+import { useThemeTransition } from '~/composables/useThemeTransition'
 
 const mobileMenuOpen = ref(false)
-const isDarkTheme = ref(true) // Forcer le dark theme par défaut pour tester
 const menuGridCells = ref<MenuGridCell[]>([])
 
 // Utiliser le composable useGridAnimation pour le burger menu
@@ -164,6 +164,14 @@ const {
   cleanup
 } = useGridAnimation()
 
+// Utiliser le composable useThemeTransition pour la navbar
+const { 
+  isDarkTheme, 
+  themeProgress,
+  initThemeTransition,
+  destroyThemeTransition
+} = useThemeTransition()
+
 // Interface pour les cellules du menu
 interface MenuGridCell {
   id: string
@@ -171,42 +179,6 @@ interface MenuGridCell {
   y: number
   highlighted: boolean
   delay: number
-}
-
-// Fonction pour détecter si on est sur une section sombre
-const checkTheme = () => {
-  const heroSection = document.querySelector('.hero-section')
-  const servicesSection = document.querySelector('.services-section')
-  const projectsSection = document.querySelector('#projets')
-  const contactSection = document.querySelector('#contact')
-  
-  // Vérifier d'abord la hero section (fond noir)
-  if (heroSection) {
-    const rect = heroSection.getBoundingClientRect()
-    const isInHero = rect.top <= 100 && rect.bottom > 100
-    if (isInHero) {
-      isDarkTheme.value = true
-      return
-    }
-  }
-  
-  // Vérifier les autres sections (fond clair)
-  const lightSections = [servicesSection, projectsSection, contactSection]
-  let isInLightSection = false
-  
-  lightSections.forEach(section => {
-    if (section) {
-      const rect = section.getBoundingClientRect()
-      if (rect.top <= 100 && rect.bottom > 100) {
-        isInLightSection = true
-      }
-    }
-  })
-  
-  isDarkTheme.value = !isInLightSection
-  
-  // Debug: afficher l'état du thème
-  console.log('Dark theme:', isDarkTheme.value)
 }
 
 // Fonction pour créer la grille du menu
@@ -263,19 +235,17 @@ const animateBurgerGrid = (event: MouseEvent) => {
 }
 
 onMounted(() => {
-  checkTheme()
+  initThemeTransition() // Initialiser la transition de thème
   initGridAnimation() // Initialiser l'animation de grille
   createMenuGrid() // Initialiser la grille du menu
-  window.addEventListener('scroll', checkTheme)
   window.addEventListener('resize', () => {
-    checkTheme()
     createMenuGrid() // Recréer la grille lors du redimensionnement
   })
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', checkTheme)
-  window.removeEventListener('resize', checkTheme)
+  destroyThemeTransition() // Détruire la transition de thème
+  window.removeEventListener('resize', createMenuGrid)
   cleanup() // Nettoyer l'animation de grille
 })
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div data-scroll-container>
     <!-- Hero Section - Thème sombre fixe avec grille interactive -->
-    <section class="hero-section">
+    <section class="hero-section" data-scroll-section>
       <!-- Grille interactive en arrière-plan -->
       <div class="hero-grid"></div>
       
@@ -31,16 +31,31 @@
               
               <!-- Colonne droite - Texte -->
               <div class="text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-serif-display font-bold text-white mb-4">
+                <h1 class="text-4xl md:text-6xl font-serif-display font-bold text-white mb-4" 
+                    data-scroll 
+                    data-scroll-speed="0.5"
+                    data-scroll-animate="fade">
                   M. Crozier
                 </h1>
-                <h2 class="text-xl md:text-2xl text-gray-300 mb-6 font-medium">
+                <h2 class="text-xl md:text-2xl text-gray-300 mb-6 font-medium" 
+                    data-scroll 
+                    data-scroll-speed="0.3" 
+                    data-scroll-delay="0.1"
+                    data-scroll-animate="reveal-left">
                   Développeur IA / Fullstack
                 </h2>
-                <p class="text-base md:text-lg text-gray-300 mb-8 max-w-lg leading-relaxed">
+                <p class="text-base md:text-lg text-gray-300 mb-8 max-w-lg leading-relaxed" 
+                   data-scroll 
+                   data-scroll-speed="0.2" 
+                   data-scroll-delay="0.2"
+                   data-scroll-animate="reveal-right">
                   Transformer vos idées en solutions intelligentes grâce à l'intelligence artificielle et au développement fullstack de nouvelle génération.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+                     data-scroll 
+                     data-scroll-speed="0.1" 
+                     data-scroll-delay="0.3"
+                     data-scroll-animate="scale">
                   <NuxtLink to="#contact" class="btn-primary text-lg px-8 py-4 hover-button pulse-cta">
                     Démarrer un projet
                   </NuxtLink>
@@ -55,86 +70,98 @@
       </div>
     </section>
 
-    <div class="stack-section">
+    <div class="stack-section" data-scroll-section>
     <!-- Container de scroll pour permettre le scroll naturel -->
     <div class="scroll-container">
       <!-- Espace pour permettre le scroll -->
     </div>
 
     <!-- Services Section - Thème clair -->
-    <section id="services" class="services-section section-padding bg-white">
+    <section id="services" class="services-section section-padding bg-white" data-scroll-section>
         <div class="container-custom">
           <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-              <h2 class="text-4xl md:text-5xl font-serif-display font-bold text-gray-900 mb-6">
-                Ce que je peux faire pour vous
-              </h2>
-              <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                En tant que développeur full-stack, je combine créativité technique et expertise stratégique pour créer des solutions digitales qui transforment votre vision en réalité.
+            <div class="text-left mb-16">
+                <h2 class="text-3xl md:text-5xl font-grayfel font-bold mb-6"
+                    data-scroll 
+                    data-scroll-speed="0.3"
+                    data-scroll-animate="fade">
+                  <span class="text-gray-400">Services&nbsp;Qui</span>&nbsp;
+                  <span 
+                    class="transforment-animated text-blue-900"
+                    @mouseenter="handleMouseEnter"
+                    @mouseleave="handleMouseLeave"
+                  >
+                    <span 
+                      v-for="(letter, index) in currentLetters" 
+                      :key="index" 
+                      class="letter"
+                    >
+                      {{ letter }}
+                    </span>
+                  </span>&nbsp;
+                  <span class="text-gray-400">Vos&nbsp;Idées</span>
+                </h2>
+              <p class="text-lg text-gray-600 max-w-2xl"
+                 data-scroll 
+                 data-scroll-speed="0.2" 
+                 data-scroll-delay="0.1"
+                 data-scroll-animate="reveal-left">
+                Développement, intelligence artificielle et automatisation—conçus pour donner vie à vos idées et rendre chaque interaction significative.
               </p>
+              <div class="w-3 h-3 bg-gray-900 rounded-full mt-8"
+                   data-scroll 
+                   data-scroll-speed="0.1" 
+                   data-scroll-delay="0.2"
+                   data-scroll-animate="scale"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-              <!-- Service 1 -->
-              <div class="group">
-                <div class="bg-gray-50 p-8 rounded-2xl hover-card h-full relative overflow-hidden">
-                  <div class="text-6xl mb-6 text-gray-400 group-hover:text-gray-600 transition-colors duration-300">
-                    💻
+            <!-- Section Expertise -->
+            <div class="mt-12">
+              <h3 class="text-2xl font-grayfel font-bold text-gray-900 mb-8">Expertise</h3>
+              
+              <div class="space-y-0">
+                <!-- Développement Web -->
+                <div class="py-6 border-b border-blue-900">
+                  <div class="flex items-center gap-4 mb-3">
+                    <span class="text-gray-900 font-medium">[1]</span>
+                    <span class="text-gray-900 font-medium">Développement Web</span>
                   </div>
-                  <h3 class="text-2xl font-serif-display font-bold text-gray-900 mb-4">
-                    Développement Web
-                  </h3>
-                  <p class="text-gray-600 mb-6 leading-relaxed">
-                    Sites web modernes et performants, applications web complexes, et solutions e-commerce sur mesure avec les dernières technologies.
+                  <p class="text-gray-500 italic text-sm ml-12">
+                    Je crée des expériences web modernes et performantes qui transforment vos idées en solutions digitales exceptionnelles.
                   </p>
-                  <ul class="space-y-2 text-sm text-gray-500">
-                    <li>• Développement frontend (Vue.js, React, Nuxt)</li>
-                    <li>• Backend & APIs (Node.js, Python, PHP)</li>
-                    <li>• E-commerce & CMS personnalisés</li>
-                    <li>• Optimisation performance & SEO</li>
-                  </ul>
                 </div>
-              </div>
 
-              <!-- Service 2 -->
-              <div class="group">
-                <div class="bg-gray-50 p-8 rounded-2xl hover-card h-full relative overflow-hidden">
-                  <div class="text-6xl mb-6 text-gray-400 group-hover:text-gray-600 transition-colors duration-300">
-                    📱
+                <!-- Développement Mobile -->
+                <div class="py-6 border-b border-blue-900">
+                  <div class="flex items-center gap-4 mb-3">
+                    <span class="text-gray-900 font-medium">[2]</span>
+                    <span class="text-gray-900 font-medium">Développement Mobile</span>
                   </div>
-                  <h3 class="text-2xl font-serif-display font-bold text-gray-900 mb-4">
-                    Applications Mobile
-                  </h3>
-                  <p class="text-gray-600 mb-6 leading-relaxed">
-                    Applications mobiles cross-platform performantes qui offrent une expérience utilisateur exceptionnelle sur tous les appareils.
+                  <p class="text-gray-500 italic text-sm ml-12">
+                    Je développe des applications mobiles cross-platform qui offrent une expérience utilisateur fluide et intuitive sur tous les appareils.
                   </p>
-                  <ul class="space-y-2 text-sm text-gray-500">
-                    <li>• Applications React Native</li>
-                    <li>• Progressive Web Apps (PWA)</li>
-                    <li>• Intégration APIs & services</li>
-                    <li>• Tests & déploiement</li>
-                  </ul>
                 </div>
-              </div>
 
-              <!-- Service 3 -->
-              <div class="group">
-                <div class="bg-gray-50 p-8 rounded-2xl hover-card h-full relative overflow-hidden">
-                  <div class="text-6xl mb-6 text-gray-400 group-hover:text-gray-600 transition-colors duration-300">
-                    🚀
+                <!-- Intégration IA -->
+                <div class="py-6 border-b border-blue-900">
+                  <div class="flex items-center gap-4 mb-3">
+                    <span class="text-gray-900 font-medium">[3]</span>
+                    <span class="text-gray-900 font-medium">Intégration IA</span>
                   </div>
-                  <h3 class="text-2xl font-serif-display font-bold text-gray-900 mb-4">
-                    Consulting Tech
-                  </h3>
-                  <p class="text-gray-600 mb-6 leading-relaxed">
-                    Accompagnement stratégique pour optimiser votre infrastructure technique et adopter les meilleures pratiques de développement.
+                  <p class="text-gray-500 italic text-sm ml-12">
+                    J'intègre l'intelligence artificielle dans vos processus pour automatiser, optimiser et révolutionner votre façon de travailler.
                   </p>
-                  <ul class="space-y-2 text-sm text-gray-500">
-                    <li>• Architecture & refactoring</li>
-                    <li>• Migration & modernisation</li>
-                    <li>• Formation équipes techniques</li>
-                    <li>• Audit de code & sécurité</li>
-                  </ul>
+                </div>
+
+                <!-- Automatisation de Process -->
+                <div class="py-6 border-b border-blue-900">
+                  <div class="flex items-center gap-4 mb-3">
+                    <span class="text-gray-900 font-medium">[4]</span>
+                    <span class="text-gray-900 font-medium">Automatisation de Process</span>
+                  </div>
+                  <p class="text-gray-500 italic text-sm ml-12">
+                    Je conçois des solutions d'automatisation qui simplifient vos tâches répétitives et libèrent votre temps pour l'essentiel.
+                  </p>
                 </div>
               </div>
             </div>
@@ -143,21 +170,31 @@
     </section>
     
     <!-- Projets Section -->
-    <section id="projets" class="content-section section-padding bg-gray-50">
+    <section id="projets" class="content-section section-padding bg-white" style="min-height: 120vh;" data-scroll-section>
         <div class="container-custom">
           <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-              <h2 class="text-4xl md:text-5xl font-serif-display font-bold text-gray-900 mb-6">
+            <div class="text-center mb-20">
+              <h2 class="text-4xl md:text-5xl font-serif-display font-bold text-gray-900 mb-8"
+                  data-scroll 
+                  data-scroll-speed="0.3"
+                  data-scroll-animate="fade">
                 Projets
               </h2>
-              <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8"
+                 data-scroll 
+                 data-scroll-speed="0.2" 
+                 data-scroll-delay="0.1"
+                 data-scroll-animate="reveal-left">
                 Découvrez quelques-uns de mes projets récents qui illustrent mon approche technique et créative.
               </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               <!-- Projet 1 -->
-              <div class="group">
+              <div class="group" 
+                   data-scroll 
+                   data-scroll-speed="0.2"
+                   data-scroll-animate="scale">
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
                   <div class="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center relative overflow-hidden">
                     <div class="text-6xl text-white z-10">🌐</div>
@@ -185,7 +222,11 @@
               </div>
 
               <!-- Projet 2 -->
-              <div class="group">
+              <div class="group" 
+                   data-scroll 
+                   data-scroll-speed="0.2" 
+                   data-scroll-delay="0.1"
+                   data-scroll-animate="scale">
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
                   <div class="h-48 bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center relative overflow-hidden">
                     <div class="text-6xl text-white z-10">📱</div>
@@ -213,7 +254,11 @@
               </div>
 
               <!-- Projet 3 -->
-              <div class="group">
+              <div class="group" 
+                   data-scroll 
+                   data-scroll-speed="0.2" 
+                   data-scroll-delay="0.2"
+                   data-scroll-animate="scale">
                 <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover-card h-full relative">
                   <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center relative overflow-hidden">
                     <div class="text-6xl text-white z-10">⚡</div>
@@ -244,46 +289,128 @@
         </div>
     </section>
     
-    <!-- Contact Section -->
-    <section id="contact" class="content-section section-padding bg-white">
+    <!-- Contact Section - Design minimaliste inspiré -->
+    <section id="contact" class="content-section section-padding bg-white" data-scroll-section>
         <div class="container-custom">
-          <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-serif-display font-bold text-gray-900 mb-6">
-              Parlons de votre projet
-            </h2>
-            <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-              Prêt à donner vie à votre idée ? Contactez-moi pour discuter de votre projet et découvrir comment nous pouvons travailler ensemble.
-            </p>
-            
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-              <div class="text-center">
-                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-gray-200 transition-colors duration-300">
-                  <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Email</h3>
-                <p class="text-gray-600">maxime@example.com</p>
-              </div>
+          <div class="max-w-5xl mx-auto">
+            <!-- En-tête de la section -->
+            <div class="text-center mb-12">
+              <p class="text-sm font-grayfel text-blue-800 uppercase tracking-widest mb-8">
+                DÉMARRONS LA CONVERSATION
+              </p>
               
-              <div class="text-center">
-                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-gray-200 transition-colors duration-300">
-                  <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
+                <!-- Titre principal avec typographie audacieuse -->
+                <div class="space-y-4 mb-12">
+                  <h2 class="text-5xl md:text-7xl font-grayfel font-bold text-gray-900 leading-none">
+                    <span class="text-reveal-container">
+                      <span 
+                        v-for="(letter, index) in title1Letters" 
+                        :key="`title1-${index}`"
+                        class="text-reveal-letter"
+                        :class="{ 'visible': letter.visible }"
+                        :style="{ transitionDelay: `${letter.delay}ms` }"
+                      >
+                        {{ letter.char }}
+                      </span>
+                    </span>
+                  </h2>
+                  <p class="text-sm font-grayfel text-gray-500 uppercase tracking-widest">
+                    N A I S S E N T &nbsp;&nbsp; D ' U N E &nbsp;&nbsp; V R A I E
+                  </p>
+                  <h2 class="text-5xl md:text-7xl font-grayfel font-bold text-gray-900 leading-none">
+                    <span class="text-reveal-container">
+                      <span 
+                        v-for="(letter, index) in title2Letters" 
+                        :key="`title2-${index}`"
+                        class="text-reveal-letter"
+                        :class="{ 'visible': letter.visible }"
+                        :style="{ transitionDelay: `${letter.delay}ms` }"
+                      >
+                        {{ letter.char }}
+                      </span>
+                    </span>
+                  </h2>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Téléphone</h3>
-                <p class="text-gray-600">+33 6 12 34 56 78</p>
-              </div>
             </div>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="mailto:maxime@example.com" class="btn-primary text-lg px-8 py-4 hover-button">
-                Envoyer un email
-              </a>
-              <a href="tel:+33612345678" class="btn-secondary text-lg px-8 py-4 hover-button">
-                Appeler maintenant
-              </a>
+
+            <!-- Formulaire de contact -->
+            <div class="max-w-2xl mx-auto">
+              <form class="space-y-8">
+                <!-- Champ Nom -->
+                <div class="contact-field">
+                  <label class="contact-label">VOTRE NOM*</label>
+                  <div class="contact-input-container">
+                    <input 
+                      type="text" 
+                      class="contact-input"
+                      placeholder=""
+                    />
+                    <div class="contact-line"></div>
+                  </div>
+                </div>
+
+                <!-- Champ Téléphone -->
+                <div class="contact-field">
+                  <label class="contact-label">TÉLÉPHONE*</label>
+                  <div class="contact-input-container">
+                    <input 
+                      type="tel" 
+                      class="contact-input"
+                      placeholder=""
+                    />
+                    <div class="contact-line"></div>
+                  </div>
+                </div>
+
+                <!-- Champ Email -->
+                <div class="contact-field">
+                  <label class="contact-label">VOTRE EMAIL*</label>
+                  <div class="contact-input-container">
+                    <input 
+                      type="email" 
+                      class="contact-input"
+                      placeholder=""
+                    />
+                    <div class="contact-line"></div>
+                  </div>
+                </div>
+
+                <!-- Champ Message -->
+                <div class="contact-field">
+                  <label class="contact-label">COMMENT PUIS-JE VOUS AIDER</label>
+                  <div class="contact-input-container">
+                    <textarea 
+                      class="contact-input contact-textarea"
+                      placeholder=""
+                      rows="4"
+                    ></textarea>
+                    <div class="contact-line"></div>
+                  </div>
+                </div>
+
+                <!-- Section Budget -->
+                <div class="contact-field">
+                  <label class="contact-label">BUDGET DU PROJET (EUR)</label>
+                  <div class="budget-options">
+                    <button type="button" class="budget-option" @click="selectBudget('1k-5k')" :class="{ active: selectedBudget === '1k-5k' }">
+                      1K-5K
+                    </button>
+                    <button type="button" class="budget-option" @click="selectBudget('5k-10k')" :class="{ active: selectedBudget === '5k-10k' }">
+                      5K-10K
+                    </button>
+                    <button type="button" class="budget-option" @click="selectBudget('more')" :class="{ active: selectedBudget === 'more' }">
+                      PLUS
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Bouton d'envoi -->
+                <div class="text-center pt-8">
+                  <button type="submit" class="contact-submit-btn">
+                    ENVOYER LE MESSAGE
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -293,9 +420,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, nextTick } from 'vue'
+import { onMounted, onUnmounted, nextTick, ref } from 'vue'
 import { useScrollAnimation } from '~/composables/useScrollAnimation'
 import { useGridAnimation } from '~/composables/useGridAnimation'
+import { useSmoothScroll } from '~/composables/useSmoothScroll'
+import { useTextRevealAnimation } from '~/composables/useTextRevealAnimation'
+import { useThemeTransition } from '~/composables/useThemeTransition'
+import { useLocomotiveScroll } from '~/composables/useLocomotiveScroll'
 
 // Meta tags pour le SEO
 useHead({
@@ -313,10 +444,130 @@ const {
   mousePosition, 
   isInitialized
 } = useGridAnimation()
+const { initSmoothScroll, destroySmoothScroll } = useSmoothScroll()
+const { 
+  splitTextIntoLetters, 
+  calculateStaircaseDelays, 
+  createScrollReveal 
+} = useTextRevealAnimation()
+const { 
+  isDarkTheme, 
+  themeProgress, 
+  initThemeTransition,
+  destroyThemeTransition
+} = useThemeTransition()
+const { 
+  initLocomotiveScroll, 
+  destroyLocomotiveScroll, 
+  updateLocomotiveScroll,
+  isReady
+} = useLocomotiveScroll()
 
-onMounted(() => {
-  nextTick(() => {
+// Animation de changement d'alphabet pour Transforment
+const isHovering = ref(false)
+const currentLetters = ref(['T', 'r', 'a', 'n', 's', 'f', 'o', 'r', 'm', 'e', 'n', 't'])
+
+// Gestion du budget sélectionné
+const selectedBudget = ref('')
+
+// Animation des lettres pour les titres de contact
+const title1Letters = ref<any[]>([])
+const title2Letters = ref<any[]>([])
+
+// Différents alphabets à tester
+const georgianLetters = ['თ', 'რ', 'ა', 'ნ', 'ს', 'ფ', 'ო', 'რ', 'მ', 'ე', 'ნ', 'თ']
+const burmeseLetters = ['တ', 'ရ', 'အ', 'န', 'စ', 'ဖ', 'အ', 'ရ', 'မ', 'အ', 'န', 'တ']
+const tibetanLetters = ['ཏ', 'ར', 'ཨ', 'ན', 'ས', 'ཕ', 'ཨ', 'ར', 'མ', 'ཨ', 'ན', 'ཏ']
+
+// Changer l'alphabet ici pour tester (remplacez georgianLetters par burmeseLetters ou tibetanLetters)
+const selectedAlphabet = burmeseLetters
+
+const handleMouseEnter = () => {
+  isHovering.value = true
+  // Changer vers l'alphabet sélectionné au moment du flou maximum (50% de l'animation)
+  setTimeout(() => {
+    if (isHovering.value) {
+      currentLetters.value = selectedAlphabet
+    }
+  }, 400)
+}
+
+const handleMouseLeave = () => {
+  isHovering.value = false
+  // Revenir au latin
+  currentLetters.value = ['T', 'r', 'a', 'n', 's', 'f', 'o', 'r', 'm', 'e', 'n', 't']
+}
+
+// Fonction pour sélectionner le budget
+const selectBudget = (budget: string) => {
+  selectedBudget.value = budget
+}
+
+onMounted(async () => {
+  nextTick(async () => {
+    // Vérifier que nous sommes côté client
+    if (typeof window !== 'undefined') {
+      // Initialiser Locomotive Scroll
+      await initLocomotiveScroll()
+      
+      // Attendre que Locomotive Scroll soit prêt
+      const checkReady = setInterval(() => {
+        if (isReady()) {
+          clearInterval(checkReady)
+          console.log('Locomotive Scroll prêt, mise à jour des animations')
+          updateLocomotiveScroll()
+        }
+      }, 100)
+      
+      // Timeout de sécurité
+      setTimeout(() => {
+        clearInterval(checkReady)
+        if (isReady()) {
+          updateLocomotiveScroll()
+        }
+      }, 2000)
+    }
+    
     initScrollAnimation()
+    initThemeTransition()
+    
+    // Initialiser l'animation des lettres
+    initTextAnimation()
   })
+})
+
+// Fonction pour initialiser l'animation des lettres
+const initTextAnimation = () => {
+  // Diviser les textes en lettres
+  const text1 = "VOS PROJETS"
+  const text2 = "COLLABORATION"
+  
+  title1Letters.value = calculateStaircaseDelays(splitTextIntoLetters(text1), true)
+  title2Letters.value = calculateStaircaseDelays(splitTextIntoLetters(text2), true)
+  
+  // Attendre que les éléments soient dans le DOM
+  nextTick(() => {
+    const contactSection = document.querySelector('#contact')
+    if (contactSection) {
+      // Créer un observer pour chaque titre individuellement
+      const title1Element = contactSection.querySelector('.text-reveal-container:first-of-type')
+      const title2Element = contactSection.querySelector('.text-reveal-container:last-of-type')
+      
+      if (title1Element) {
+        console.log('Initializing animation for title1:', title1Letters.value)
+        createScrollReveal(title1Element as HTMLElement, title1Letters.value)
+      }
+      if (title2Element) {
+        console.log('Initializing animation for title2:', title2Letters.value)
+        createScrollReveal(title2Element as HTMLElement, title2Letters.value)
+      }
+    }
+  })
+}
+
+onUnmounted(() => {
+  destroyLocomotiveScroll()
+  destroySmoothScroll()
+  destroyThemeTransition()
 })
 </script>
